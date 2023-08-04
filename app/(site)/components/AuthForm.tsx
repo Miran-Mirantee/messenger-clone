@@ -6,6 +6,7 @@ import { BsGithub, BsGoogle } from "react-icons/bs";
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
+import { isLineBreak } from "typescript";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -53,7 +54,13 @@ const AuthForm = () => {
       <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {variant === "REGISTER" && (
-            <Input id="name" label="Name" register={register} errors={errors} />
+            <Input
+              id="name"
+              label="Name"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+            />
           )}
           <Input
             id="email"
@@ -61,6 +68,7 @@ const AuthForm = () => {
             type="email"
             register={register}
             errors={errors}
+            disabled={isLoading}
           />
           <Input
             id="password"
@@ -68,6 +76,7 @@ const AuthForm = () => {
             type="password"
             register={register}
             errors={errors}
+            disabled={isLoading}
           />
           <div>
             <Button disabled={isLoading} fullWidth type="submit">
@@ -91,10 +100,12 @@ const AuthForm = () => {
           <AuthSocialButton
             icon={BsGithub}
             onClick={() => socialAction("github")}
+            disabled={isLoading}
           />
           <AuthSocialButton
             icon={BsGoogle}
             onClick={() => socialAction("google")}
+            disabled={isLoading}
           />
         </div>
       </div>
