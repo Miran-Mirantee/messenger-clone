@@ -20,3 +20,5 @@ const getCurrentUser = async () => {
     return null;
   }
 };
+
+export default getCurrentUser;
