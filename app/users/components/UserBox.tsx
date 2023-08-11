@@ -1,5 +1,3 @@
-"use client";
-
 import Avatar from "@/app/components/Avatar";
 import { User } from "@prisma/client";
 import axios from "axios";
@@ -18,9 +16,7 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     setIsLoading(true);
 
     axios
-      .post("/api/conversations", {
-        userid: data.id,
-      })
+      .post("/api/conversations", { userId: data.id })
       .then((data) => {
         router.push(`/conversations/${data.data.id}`);
       })
