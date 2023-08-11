@@ -62,6 +62,7 @@ export async function POST(request: Request) {
     if (singleConversation) {
       return NextResponse.json(singleConversation);
     }
+
     const newConversation = await prisma.conversation.create({
       data: {
         users: {
