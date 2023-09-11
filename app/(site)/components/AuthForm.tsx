@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { BsGithub, BsGoogle } from "react-icons/bs";
+import { BsGithub, BsGoogle, BsFacebook } from "react-icons/bs";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
@@ -130,7 +130,7 @@ const AuthForm = () => {
             <div className="w-full border-t border-gray-300" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-2 text-gray-500">
+            <span className="bg-gray-100 px-2 text-gray-500">
               Or continue with
             </span>
           </div>
@@ -144,6 +144,11 @@ const AuthForm = () => {
           <AuthSocialButton
             icon={BsGoogle}
             onClick={() => socialAction("google")}
+            disabled={isLoading}
+          />
+          <AuthSocialButton
+            icon={BsFacebook}
+            onClick={() => socialAction("facebook")}
             disabled={isLoading}
           />
         </div>
