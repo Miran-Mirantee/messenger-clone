@@ -18,14 +18,34 @@ import {
   Radio,
   Button,
 } from "@chakra-ui/react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+type Inputs = {
+  type: string;
+  participants: number;
+  priceRange: number;
+  accesibilityRange: number;
+};
 
 const TestPlayground = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onsubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
     <div className="flex m-4 flex-col items-center">
-      <FormControl className="w-[480px] flex flex-col gap-6">
-        <div>
+      <form
+        onSubmit={handleSubmit(onsubmit)}
+        className="w-[480px] flex flex-col gap-6"
+      >
+        <FormControl>
           <FormLabel>Type of activity</FormLabel>
-          <Select placeholder="Select type">
+          <Select placeholder="Select type" {...register("type")}>
             <option value="education">education</option>
             <option value="recreational">recreational</option>
             <option value="social">social</option>
@@ -36,30 +56,40 @@ const TestPlayground = () => {
             <option value="music">music</option>
             <option value="busywork">busywork</option>
           </Select>
-        </div>
-        <div>
+        </FormControl>
+        <FormControl>
           <FormLabel>Number of participant</FormLabel>
-          <NumberInput defaultValue={1} min={1}>
-            <NumberInputField />
+          <NumberInput min={1}>
+            <NumberInputField {...register("participants")} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
             </NumberInputStepper>
           </NumberInput>
-        </div>
-        <RadioGroup defaultValue="1">
+        </FormControl>
+        <RadioGroup>
           <FormLabel>Price range</FormLabel>
           <HStack>
-            <Radio value="1">Free</Radio>
-            <Radio value="2">Not Free</Radio>
+            <Radio value="1" {...register("priceRange")}>
+              Free
+            </Radio>
+            <Radio value="2" {...register("priceRange")}>
+              Not Free
+            </Radio>
           </HStack>
         </RadioGroup>
-        <RadioGroup defaultValue="1">
+        <RadioGroup>
           <FormLabel>Accesibility range</FormLabel>
           <HStack>
-            <Radio value="1">Easy</Radio>
-            <Radio value="2">Normal</Radio>
-            <Radio value="3">Hard</Radio>
+            <Radio value="1" {...register("accesibilityRange")}>
+              Easy
+            </Radio>
+            <Radio value="2" {...register("accesibilityRange")}>
+              Normal
+            </Radio>
+            <Radio value="3" {...register("accesibilityRange")}>
+              Hard
+            </Radio>
           </HStack>
         </RadioGroup>
         <HStack>
@@ -70,11 +100,11 @@ const TestPlayground = () => {
           >
             Random
           </Button>
-          <Button type="submit" colorScheme="teal">
+          <Button type="submit" colorScheme="teal" className="bg-[#319795ec]">
             Submit
           </Button>
         </HStack>
-      </FormControl>
+      </form>
     </div>
   );
 };
