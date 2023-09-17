@@ -1,6 +1,7 @@
 "use client";
 
 import ActivityForm from "./components/ActivityForm";
+import getActivity from "../actions/getActivity";
 import {
   FormControl,
   FormLabel,
@@ -21,10 +22,10 @@ import {
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
-  type: string;
-  participants: number;
-  priceRange: number;
-  accesibilityRange: number;
+  type?: string;
+  participants?: number;
+  priceRange?: number;
+  accessibilityRange?: number;
 };
 
 const TestPlayground = () => {
@@ -81,20 +82,22 @@ const TestPlayground = () => {
         <RadioGroup>
           <FormLabel>Accesibility range</FormLabel>
           <HStack>
-            <Radio value="1" {...register("accesibilityRange")}>
+            <Radio value="1" {...register("accessibilityRange")}>
               Easy
             </Radio>
-            <Radio value="2" {...register("accesibilityRange")}>
+            <Radio value="2" {...register("accessibilityRange")}>
               Normal
             </Radio>
-            <Radio value="3" {...register("accesibilityRange")}>
+            <Radio value="3" {...register("accessibilityRange")}>
               Hard
             </Radio>
           </HStack>
         </RadioGroup>
         <HStack>
           <Button
-            onClick={() => console.log("random")}
+            onClick={async () => {
+              console.log(await getActivity());
+            }}
             colorScheme="teal"
             variant="outline"
           >
