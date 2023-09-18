@@ -40,7 +40,7 @@ describe("get activity function", () => {
       minAccessibility: "0.1",
       maxAccessibility: "0.5",
     });
-    expect(activity.price).toBeLessThanOrEqual(0.5);
-    expect(activity.price).toBeGreaterThanOrEqual(0.1);
+    expect(activity.accessibility).toBeLessThanOrEqual(0.5);
+    expect(activity.accessibility).toBeGreaterThanOrEqual(0.1);
   });
 });

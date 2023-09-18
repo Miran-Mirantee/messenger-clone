@@ -1,6 +1,5 @@
 "use client";
 
-import ActivityForm from "./components/ActivityForm";
 import getActivity from "../actions/getActivity";
 import {
   FormControl,
@@ -20,13 +19,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-type Inputs = {
-  type?: string;
-  participants?: number;
-  priceRange?: number;
-  accessibilityRange?: number;
-};
+import { ActivityInputs } from "../types";
 
 const TestPlayground = () => {
   const {
@@ -34,9 +27,9 @@ const TestPlayground = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<ActivityInputs>();
 
-  const onsubmit: SubmitHandler<Inputs> = async (data) => {
+  const onsubmit: SubmitHandler<ActivityInputs> = async (data) => {
     console.log(await getActivity());
   };
   return (
