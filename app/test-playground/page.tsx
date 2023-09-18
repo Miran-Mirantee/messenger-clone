@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ActivityInputs } from "../types";
+import getActivityParams from "../actions/getActivityParams";
 
 const TestPlayground = () => {
   const {
@@ -30,7 +31,10 @@ const TestPlayground = () => {
   } = useForm<ActivityInputs>();
 
   const onsubmit: SubmitHandler<ActivityInputs> = async (data) => {
-    console.log(await getActivity());
+    console.log(data);
+    const yahoo = getActivityParams(data);
+    console.log("yahoo!", yahoo);
+    console.log(await getActivity(yahoo));
   };
   return (
     <div className="flex m-4 flex-col items-center">
