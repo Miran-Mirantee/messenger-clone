@@ -25,3 +25,14 @@ export type ActivityParams = {
   minAccessibility?: string;
   maxAccessibility?: string;
 };
+
+export type Activity = {
+  key: number;
+  activity: string;
+  type: string;
+  participants: number;
+  price: number;
+  accessibility: number;
+  link?: string;
+  error?: string;
+};
