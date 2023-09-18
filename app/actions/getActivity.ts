@@ -1,21 +1,27 @@
 type Inputs = {
   type?: string;
-  participants?: number;
-  priceRange?: number;
-  accessibilityRange?: number;
+  participants?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  minAccessibility?: string;
+  maxAccessibility?: string;
 };
 
 export default async function getActivity({
-  type,
-  participants,
-  priceRange,
-  accessibilityRange,
+  type = "",
+  participants = "",
+  minPrice = "",
+  maxPrice = "",
+  minAccessibility = "",
+  maxAccessibility = "",
 }: Inputs = {}): Promise<any> {
   try {
-    const response = await fetch("http://www.boredapi.com/api/activity/");
+    const response = await fetch(
+      `http://www.boredapi.com/api/activity/?type=${type}&participants=${participants}&minprice=${minPrice}&maxprice=${maxPrice}&minaccessibility=${minAccessibility}&maxaccessibility=${maxAccessibility}`
+    );
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log("Error", error);
+    console.log("ERROR", error);
   }
 }

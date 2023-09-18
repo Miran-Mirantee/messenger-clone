@@ -36,8 +36,9 @@ const TestPlayground = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onsubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
+  const onsubmit: SubmitHandler<Inputs> = async (data) => {
+    console.log(await getActivity());
+  };
   return (
     <div className="flex m-4 flex-col items-center">
       <form
@@ -75,7 +76,10 @@ const TestPlayground = () => {
               Free
             </Radio>
             <Radio value="2" {...register("priceRange")}>
-              Not Free
+              Cheap
+            </Radio>
+            <Radio value="3" {...register("priceRange")}>
+              Costly
             </Radio>
           </HStack>
         </RadioGroup>
