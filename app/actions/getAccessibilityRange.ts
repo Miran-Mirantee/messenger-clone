@@ -1,19 +1,19 @@
-const getPriceRange = (
+const getAccessibilityRange = (
   input: number
-): { minPrice: string; maxPrice: string } => {
+): { minAccessibility: string; maxAccessibility: string } => {
   let min: string;
   let max: string;
   switch (input) {
     case 1:
       min = "0";
-      max = "0";
+      max = "0.3";
       break;
     case 2:
-      min = "0.1";
-      max = "0.4";
+      min = "0.4";
+      max = "0.7";
       break;
     case 3:
-      min = "0.5";
+      min = "0.8";
       max = "1.0";
       break;
     default:
@@ -21,7 +21,7 @@ const getPriceRange = (
       max = "I have no idea.";
       break;
   }
-  return { minPrice: min, maxPrice: max };
+  return { minAccessibility: min, maxAccessibility: max };
 };
 
-export default getPriceRange;
+export default getAccessibilityRange;
