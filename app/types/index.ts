@@ -13,8 +13,8 @@ export type FullConversationType = Conversation & {
 export type ActivityInputs = {
   type?: string;
   participants?: number;
-  priceRange?: number;
-  accessibilityRange?: number;
+  priceRange?: string;
+  accessibilityRange?: string;
 };
 
 export type ActivityParams = {
