@@ -17,10 +17,15 @@ import {
   RadioGroup,
   Radio,
   Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
 } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ActivityInputs } from "../types";
+import { ActivityInputs, Activity } from "../types";
 import getActivityParams from "../actions/getActivityParams";
+import { useState } from "react";
 
 const TestPlayground = () => {
   const {
@@ -31,17 +36,57 @@ const TestPlayground = () => {
   } = useForm<ActivityInputs>();
 
   const onsubmit: SubmitHandler<ActivityInputs> = async (data) => {
-    console.log(data);
     const yahoo = getActivityParams(data);
-    console.log("yahoo!", yahoo);
-    console.log(await getActivity(yahoo));
+
+    // console.log("yahoo!", yahoo);
+    const fetchedData = await getActivity(yahoo);
+    console.log(fetchedData);
+    setActivity(fetchedData);
   };
+
+  const [activity, setActivity] = useState<Activity | null>();
   return (
-    <div className="flex m-4 flex-col items-center">
+    <div className="flex p-4 flex-col items-center">
       <form
         onSubmit={handleSubmit(onsubmit)}
         className="w-[480px] flex flex-col gap-6"
       >
+        <Card size={"md"} className="h-[224px]">
+          <CardBody className="flex flex-col justify-center">
+            {activity?.error ? (
+              <div>
+                <span className="font-bold">Error: </span>
+                {activity?.error}
+              </div>
+            ) : (
+              <>
+                <div>
+                  <span className="font-bold">Activity: </span>
+                  {activity?.activity}
+                </div>
+                <div>
+                  <span className="font-bold">Type: </span> {activity?.type}
+                </div>
+                <div>
+                  <span className="font-bold">Number of participants: </span>
+                  {activity?.participants}
+                </div>
+                <div>
+                  <span className="font-bold">Price: </span>
+                  {activity?.price}
+                </div>
+                <div>
+                  <span className="font-bold">Accessibility: </span>
+                  {activity?.accessibility}
+                </div>
+                <div>
+                  <span className="font-bold">Link: </span>
+                  {activity?.link}
+                </div>
+              </>
+            )}
+          </CardBody>
+        </Card>
         <FormControl>
           <FormLabel>Type of activity</FormLabel>
           <Select placeholder="Select type" {...register("type")}>
@@ -97,7 +142,9 @@ const TestPlayground = () => {
         <HStack>
           <Button
             onClick={async () => {
-              console.log(await getActivity());
+              const fetchedData = await getActivity();
+              console.log(fetchedData);
+              setActivity(fetchedData);
             }}
             colorScheme="teal"
             variant="outline"
