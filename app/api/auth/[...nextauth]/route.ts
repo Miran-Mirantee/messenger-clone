@@ -23,6 +23,12 @@ export const authOptions: AuthOptions = {
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          scope:
+            "pages_show_list pages_messaging pages_read_engagement pages_manage_metadata pages_manage_posts",
+        },
+      },
     }),
     CredentialsProvider({
       name: "credentials",
